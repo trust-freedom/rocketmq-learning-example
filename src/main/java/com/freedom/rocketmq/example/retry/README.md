@@ -1,7 +1,6 @@
-# 重试
-## 消费端重试
+# 消费端重试
 
-### 1、（主动）消费端异常，并反馈reconsumer_later
+## 1、（主动）消费端异常，并反馈reconsumer_later
 
 **代码：** com.freedom.rocketmq.example.retry.consumer_retry.reconsume_later 
 
@@ -30,7 +29,8 @@
 在失败一定次数后，可将消息持久化并告警，待后续处理
 
 
-###2、（被动）消费过程中宕机，RocketMQ主动负载给Consumer Group中的其它消费者
+##2、（被动）消费过程中宕机，RocketMQ主动负载给Consumer Group中的其它消费者
+
 
 **代码：** com.freedom.rocketmq.example.retry.consumer_retry.consumer_down
 
