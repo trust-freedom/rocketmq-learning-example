@@ -2,7 +2,7 @@
 
 ## 1、（主动）消费端异常，并反馈reconsumer_later
 
-**代码：** com.freedom.rocketmq.example.retry.consumer_retry.reconsume_later 
+**代码：** consumer_retry.reconsume_later 
 
 当消费端发生异常，并反馈RECONSUME_LATER后，RocketMQ会在一定时间后重发消息给Consumer Group中的消费者，重发的时间间隔为：
 
@@ -26,13 +26,14 @@
 | 16 | 2 小时 | 
 
 在实际业务中，没必要重试那么多次
+
 在失败一定次数后，可将消息持久化并告警，待后续处理
 
 
-##2、（被动）消费过程中宕机，RocketMQ主动负载给Consumer Group中的其它消费者
+## 2、（被动）消费过程中宕机，RocketMQ主动负载给Consumer Group中的其它消费者
 
 
-**代码：** com.freedom.rocketmq.example.retry.consumer_retry.consumer_down
+**代码：** consumer_retry.consumer_down
 
 **场景1：** 
 先启动Consumer1、Consumer2，再启动Producer生产一条消息，假设消息正好由Consumer1消费，Consumer1会sleep 60秒才反馈成功，在Consumer1未反馈期间，停掉Consumer1，模拟Consumer1宕机，此时Consumer2会收到此条消息
