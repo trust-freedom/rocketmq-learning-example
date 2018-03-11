@@ -48,4 +48,7 @@
 >msgId 一定是全局唯一标识符，但是可能会存在同样的消息有两个不同 msgId 的情况（有多种原因），这种情况可能会使业务上重复消费，建议最好使用消息内容中的唯一标识字段去重
 >2. 使用业务层面的状态机去重
 
+RocketMQ消息可以在构造时指定业务keys：
+`Message(String topic, String tags, String keys, byte[] body)`
+在消费时可以获取keys，用于消息去重
 
