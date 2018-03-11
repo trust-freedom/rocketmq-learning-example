@@ -49,6 +49,8 @@
 >2. 使用业务层面的状态机去重
 
 RocketMQ消息可以在构造时指定业务keys：
+
 `Message(String topic, String tags, String keys, byte[] body)`
+
 在消费时可以获取keys，用于消息去重
 
