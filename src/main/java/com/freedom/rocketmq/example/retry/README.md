@@ -1,3 +1,15 @@
+# 生产者重试
+
+**代码：** producer_retry.producer_send_fail
+
+可以在发送消息时设置发送失败的重试次数，默认值是2
+
+```
+同步发送 - producer.send(msg)，使用producer.setRetryTimesWhenSendFailed()设置失败重试次数，默认2次
+异步发送 - producer.send(msg, sendCallback)，使用producer.setRetryTimesWhenSendAsyncFailed()设置失败重试次数，默认2次
+```
+<br>
+
 # 消费端重试
 
 ## 1、（主动）消费端异常，并反馈reconsumer_later
