@@ -4,6 +4,7 @@
 
 **代码：** consumer_retry.reconsume_later 
 
+**场景：** 
 当消费端发生异常，并反馈RECONSUME_LATER后，RocketMQ会在一定时间后重发消息给Consumer Group中的消费者，重发的时间间隔为：
 
 |第几次重试|每次重试时间间隔|
@@ -32,13 +33,16 @@
 
 ## 2、（被动）消费过程中宕机，RocketMQ主动负载给Consumer Group中的其它消费者
 
-
 **代码：** consumer_retry.consumer_down
 
-**场景1：** 
-先启动Consumer1、Consumer2，再启动Producer生产一条消息，假设消息正好由Consumer1消费，Consumer1会sleep 60秒才反馈成功，在Consumer1未反馈期间，停掉Consumer1，模拟Consumer1宕机，此时Consumer2会收到此条消息
+**场景：** 
+先启动Consumer1、Consumer2，再启动Producer生产一条消息，假设消息正好由Consumer1消费，Consumer1会sleep 60秒模拟业务处理才反馈成功，在Consumer1未反馈期间，停掉Consumer1，模拟Consumer1宕机，此时RocketMQ会重发消息给Consumer2
 
-**场景2：** 
+## 3、（被动）部分Consumer订阅晚于Producer生产的非法情况，重试机制导致消息重复消费
+
+**代码：** consumer_retry.start_late
+
+**场景：** 
 先启动Consumer1，再启动Producer生产一条消息，Consumer1会sleep 60秒才反馈成功，Consumer1未反馈期间，启动Consumer2，Consumer2也可以成功消费这条消息
 
 这种情况就是不合法的了，即同一条消息被Consumer1、Consumer2重复消费。按照正常程序来说，应该先启动消费者，生产者再生产消息，但实际业务中不可能完全符合，比如程序升级期间可能产生类似上述的情况，Consumer2停机升级，再启动后导致重复消费，故消费端需要增加 **幂等处理**
