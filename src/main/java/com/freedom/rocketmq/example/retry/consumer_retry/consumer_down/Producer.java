@@ -7,6 +7,7 @@ import com.alibaba.rocketmq.common.message.Message;
 
 /**
  * 生产者
+ * 只生产一条消息，并假设由Consumer1接收到，待Consumer1宕机后，RocketMQ重发到Consumer2
  */
 public class Producer {
 

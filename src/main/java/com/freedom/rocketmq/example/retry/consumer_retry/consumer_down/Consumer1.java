@@ -15,7 +15,9 @@ import java.util.List;
 
 /**
  * 消费者1
- * 故意sleep 60s后再反馈消息
+ * 假设Consumer1收到了消息，并故意sleep 60s模拟业务处理，之后再ACK
+ * 测试中需要在sleep 60s期间将Consumer1停掉，模拟宕机
+ * 这样RocketMQ会将消息重发到Consumer2
  */
 public class Consumer1 {
 
